@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CEA - Relatório de Melhorias</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background-color: #f5f8fc;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* HEADER */
+    .header {
+      background-color: #256fa7;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      padding: 20px;
+    }
+
+    .header img {
+      max-width: 150px;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      width: 100%;
+      background-color: #1F6FA3;
+      border-top: 3px solid white;
+    }
+
+    .navbar ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+
+    .navbar li a {
+      display: block;
+      padding: 14px 25px;
+      color: white;
+      text-decoration: none;
+      transition: background-color .3s;
+    }
+
+    .navbar li a:hover,
+    .navbar li a.active {
+      background-color: #006b9f;
+    }
+
+    /* CONTEÚDO */
+    .table-wrapper {
+      flex: 1;
+      width: 100%;
+      background-color: #fff;
+    }
+
+    iframe {
+      width: 100%;
+      height: calc(100vh - 200px);
+      border: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <div class="header">
+    <img src="CEASLOGAN3.png" alt="CEA Logo">
+    <h1>MANAUS I - Controle de Chaves</h1>
+  </div>
+
+  <!-- NAVBAR -->
+  <div class="navbar">
+    <ul>
+      <li><a href="index.html">Controle de Chaves</a></li>
+      <li><a class="active" href="relatorio.html">Verificação de Setor</a></li>
+      <li><a href="#" onclick="logout()">Sair</a></li>
+    </ul>
+  </div>
+
+  <!-- IFRAME JOTFORM -->
+  <div class="table-wrapper">
+
+    <iframe
+      id="JotFormIFrame-260135498148664"
+      title="Verificação de Setor"
+      onload="window.parent.scrollTo(0,0)"
+      allowtransparency="true"
+      allow="geolocation; microphone; camera; fullscreen; payment"
+      src="https://form.jotform.com/260135498148664"
+      scrolling="no">
+    </iframe>
+
+  </div>
+
+  <!-- SCRIPT JOTFORM -->
+  <script src="https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js"></script>
+  <script>
+    window.jotformEmbedHandler(
+      "iframe[id='JotFormIFrame-260135498148664']",
+      "https://form.jotform.com/"
+    );
+  </script>
+
+  <!-- LOGIN -->
+  <script>
+    if (localStorage.getItem('loggedIn') !== 'true') {
+      window.location.href = "login.html";
+    }
+
+    function logout() {
+      localStorage.removeItem('loggedIn');
+      window.location.href = "login.html";
+    }
+  </script>
+
+</body>
+</html>
