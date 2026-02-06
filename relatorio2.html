@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CEA - Verificação de Setor</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background-color: #f5f8fc;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* HEADER */
+    .header {
+      background-color: #256fa7;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      padding: 20px;
+    }
+
+    .header img {
+      max-width: 150px;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      width: 100%;
+      background-color: #1F6FA3;
+      border-top: 3px solid white;
+    }
+
+    .navbar ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+
+    .navbar li a {
+      display: block;
+      padding: 14px 25px;
+      color: white;
+      text-decoration: none;
+      transition: background-color .3s;
+    }
+
+    .navbar li a:hover,
+    .navbar li a.active {
+      background-color: #006b9f;
+    }
+
+    /* CONTEÚDO */
+    .content {
+      flex: 1;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    /* IFRAME */
+    .iframe-container {
+      width: 100%;
+      background-color: #ffffff;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .iframe-container iframe {
+      width: 100%;
+      height: calc(100vh - 300px + 120px);
+      border: none;
+      transform: translateY(-120px); /* PUXA PARA CIMA */
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- BLOQUEIO DE LOGIN -->
+  <script>
+    if (localStorage.getItem("loggedIn") !== "true") {
+      window.location.href = "login.html";
+    }
+  </script>
+
+  <!-- HEADER -->
+  <div class="header">
+    <img src="CEASLOGAN3.png" alt="CEA Logo">
+    <h1>MANAUS I - Controle de Chaves</h1>
+  </div>
+
+  <!-- NAVBAR -->
+  <div class="navbar">
+    <ul>
+      <li><a href="index.html">Controle de Chaves</a></li>
+      <li><a href="relatorio.html" class="active">Verificação de Setor</a></li>
+      <li><a href="relatorio2.html">Relatório</a></li>
+      <li><a href="#" onclick="logout()">Sair</a></li>
+    </ul>
+  </div>
+
+  <!-- CONTEÚDO -->
+  <div class="content">
+    <div class="iframe-container">
+      <iframe
+        src="https://www.jotform.com/submissions/260135498148664"
+        loading="lazy">
+      </iframe>
+    </div>
+  </div>
+
+  <!-- LOGOUT -->
+  <script>
+    function logout() {
+      localStorage.removeItem("loggedIn");
+      window.location.href = "login.html";
+    }
+  </script>
+
+</body>
+</html>
