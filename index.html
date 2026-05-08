@@ -6,9 +6,10 @@
   <title>CEA - Área de Trabalho</title>
 
   <style>
+
     body {
       margin: 0;
-      font-family: 'Arial', sans-serif;
+      font-family: Arial, sans-serif;
       background-color: #f3f3fc;
     }
 
@@ -27,29 +28,71 @@
     .navbar {
       width: 100%;
       background-color: #1F6FA3;
-      padding: 0;
       border-top: 3px solid white;
     }
 
-    .navbar ul {
+    /* MENU */
+    .menu {
       list-style: none;
       margin: 0;
       padding: 0;
       display: flex;
     }
 
-    .navbar ul li a {
+    .menu li {
+      position: relative;
+    }
+
+    .menu li a {
       display: block;
       padding: 14px 25px;
       text-decoration: none;
-      color: #ffffff;
+      color: white;
       font-size: 16px;
       transition: background-color 0.3s;
+      cursor: pointer;
     }
 
-    .navbar ul li a.active,
-    .navbar ul li a:hover {
+    .menu li a:hover,
+    .menu li a.active {
       background-color: #006b9f;
+    }
+
+    /* SUBMENU */
+    .submenu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: white;
+      min-width: 250px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      z-index: 999;
+      border-radius: 0 0 8px 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .submenu li {
+      width: 100%;
+    }
+
+    .submenu li a {
+      color: #333;
+      padding: 12px 15px;
+      background-color: white;
+    }
+
+    .submenu li a:hover {
+      background-color: #f1f5f9;
+      color: #006b9f;
+    }
+
+    /* MOSTRAR SUBMENU */
+    .dropdown:hover .submenu {
+      display: block;
     }
 
     /* CONTAINER */
@@ -64,40 +107,129 @@
       height: 80vh;
       border: none;
     }
+
   </style>
 </head>
 
 <body>
 
-  <!-- BLOQUEIO DE LOGIN -->
+  <!-- LOGIN -->
   <script>
     if (localStorage.getItem("loggedIn") !== "true") {
       window.location.href = "login.html";
     }
   </script>
 
+  <!-- HEADER -->
   <div class="header">
     <img src="CEASLOGAN3.png" alt="CEA Logo" style="max-width: 150px;">
     <h1>MANAUS I - Controle De Chaves</h1>
   </div>
 
+  <!-- NAVBAR -->
   <div class="navbar">
-    <ul>
-      <li><a href="index.html" class="active">Controle de Chaves</a></li>
-      <li><a href="relatorio.html">Verificação de Setor</a></li>
-      <li><a href="#" onclick="logout()">Sair</a></li>
+
+    <ul class="menu">
+
+      <!-- MENU CHAVES -->
+      <li class="dropdown">
+
+        <a href="index.html" class="active">
+          Controle de Chaves
+        </a>
+
+        <ul class="submenu">
+
+          <li>
+            <a href="index.html">
+              Planilha de Controle
+            </a>
+          </li>
+
+          <!-- BOTÃO POPUP -->
+          <li>
+            <a id="abrirMovimentacao">
+              Movimentações
+            </a>
+          </li>
+
+          <li>
+            <a href="HISTORICO.HTML">
+              Histórico
+            </a>
+          </li>
+
+        </ul>
+
+      </li>
+
+      <!-- MENU RELATÓRIO -->
+      <li>
+        <a href="relatorio.html">
+          Verificação de Setor
+        </a>
+      </li>
+
+      <!-- SAIR -->
+      <li>
+        <a href="#" onclick="logout()">
+          Sair
+        </a>
+      </li>
+
     </ul>
+
   </div>
 
+  <!-- CONTEÚDO -->
   <div class="form-container">
 
-    <!-- 📊 IFRAME GOOGLE SHEETS -->
     <iframe
       src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRHnctJD5KGQpP_c6ZD7h4h6DpP5r8tRIAlf_THADgC53ZwORDQJQhgX1IooA0Znfs-h9tqaEJDoLw-/pubhtml?widget=true&headers=false">
     </iframe>
 
   </div>
 
+  <!-- BOTÃO FILLOUT INVISÍVEL -->
+  <div
+    id="filloutPopup"
+    data-fillout-id="cQJhGV78Czus"
+    data-fillout-embed-type="popup"
+    data-fillout-button-text="Abrir"
+    data-fillout-dynamic-resize
+    data-fillout-button-color="#2E44BF"
+    data-fillout-inherit-parameters
+    data-fillout-popup-size="medium"
+    style="display:none;">
+  </div>
+
+  <!-- SCRIPT FILLOUT -->
+  <script src="https://server.fillout.com/embed/v1/"></script>
+
+  <!-- SCRIPT ABRIR POPUP -->
+  <script>
+
+    window.addEventListener("load", function () {
+
+      const menuBotao = document.getElementById("abrirMovimentacao");
+
+      menuBotao.addEventListener("click", function () {
+
+        const botaoFillout = document.querySelector(
+          '[data-fillout-button-text="Abrir"] button'
+        );
+
+        if (botaoFillout) {
+          botaoFillout.click();
+        }
+
+      });
+
+    });
+
+  </script>
+
+  <!-- LOGOUT -->
   <script>
     function logout() {
       localStorage.removeItem("loggedIn");
@@ -107,4 +239,3 @@
 
 </body>
 </html>
-
