@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CEA - Histórico</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f3f3fc;
+    }
+
+    /* HEADER */
+    .header {
+      background-color: #256fa7;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      padding: 20px;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      width: 100%;
+      background-color: #1F6FA3;
+      border-top: 3px solid white;
+    }
+
+    .menu {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+
+    .menu li {
+      position: relative;
+    }
+
+    .menu li a {
+      display: block;
+      padding: 14px 25px;
+      text-decoration: none;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    /* SOMENTE HOVER */
+    .menu li a:hover {
+      background-color: #006b9f;
+    }
+
+    /* SUBMENU */
+    .submenu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: white;
+      min-width: 250px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      z-index: 999;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .submenu li a {
+      color: #333;
+      padding: 12px 15px;
+      display: block;
+    }
+
+    .submenu li a:hover {
+      background-color: #f1f5f9;
+      color: #006b9f;
+    }
+
+    .dropdown:hover .submenu {
+      display: block;
+    }
+
+    /* IFRAME RESPONSIVO */
+    .planilha {
+      width: 100%;
+      height: 80vh;
+      border: none;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<script>
+  if (localStorage.getItem("loggedIn") !== "true") {
+    window.location.href = "login.html";
+  }
+</script>
+
+<!-- HEADER -->
+<div class="header">
+  <img src="CEASLOGAN3.png" style="max-width:150px;">
+  <h1>MANAUS I - Histórico de Chaves</h1>
+</div>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <ul class="menu">
+
+    <li class="dropdown">
+      <a href="index.html">Controle de Chaves</a>
+
+      <ul class="submenu">
+        <li><a href="index.html">Planilha de Controle</a></li>
+
+        <li>
+          <a id="abrirMovimentacao">Movimentações</a>
+        </li>
+
+        <li>
+          <a href="HISTORICO.HTML">Histórico</a>
+        </li>
+      </ul>
+    </li>
+
+    <li>
+      <a href="relatorio.html">Verificação de Setor</a>
+    </li>
+
+    <li>
+      <a href="#" onclick="logout()">Sair</a>
+    </li>
+
+  </ul>
+</div>
+
+<!-- HISTÓRICO (GOOGLE SHEETS) -->
+<iframe 
+  class="planilha"
+  src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQAyzkKIKsKMEu2U7KJLIeIasv1mm72S-Z5KR7MFb9RMrvqYc0_vnH8VH_rZlIGJ5ND6Oov21Q8OG4E/pubhtml?widget=true&headers=false">
+</iframe>
+
+<!-- FILLOUT POPUP -->
+<div
+  id="filloutPopup"
+  data-fillout-id="cQJhGV78Czus"
+  data-fillout-embed-type="popup"
+  data-fillout-button-text="Abrir"
+  data-fillout-dynamic-resize
+  data-fillout-button-color="#2E44BF"
+  data-fillout-inherit-parameters
+  data-fillout-popup-size="medium"
+  style="display:none;">
+</div>
+
+<script src="https://server.fillout.com/embed/v1/"></script>
+
+<!-- ABRIR MOVIMENTAÇÕES -->
+<script>
+window.addEventListener("load", function () {
+
+  const menuBotao = document.getElementById("abrirMovimentacao");
+
+  if (menuBotao) {
+    menuBotao.addEventListener("click", function () {
+
+      const botaoFillout = document.querySelector(
+        '[data-fillout-button-text="Abrir"] button'
+      );
+
+      if (botaoFillout) {
+        botaoFillout.click();
+      }
+
+    });
+  }
+
+});
+</script>
+
+<!-- LOGOUT -->
+<script>
+function logout() {
+  localStorage.removeItem("loggedIn");
+  window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>
